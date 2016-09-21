@@ -20,4 +20,44 @@ body {
 	height: 100%;
 	overflow: hidden;
 	overflow-y: visible;
+
+	z-index: 100;
+}
+
+
+/* ########### #*/
+/* # Topic Bar #*/
+/* ########### #*/
+
+div#topic_bar {
+	position: fixed;
+	z-index: 200;
+
+	top: 0;
+	left: 0;
+	right: 0;
+
+	padding: 0.7em 1em;
+
+	background-color: #FCFCFC;
+
+	border-bottom: 0.2em solid #00cccc;
+
+	font-size: 1.1em;
+	line-height: 1.1em;
+	font-weight: 600;
+	text-align: justify;
+
+	transition: all 0.3s ease-in-out;
+}
+div#topic_bar:hover {
+	padding: 1.2em 1em;
+}
+
+div#topic_bar a {
+	color: #292f33;
+	transition: all 0.2s ease-in-out;
+}
+div#topic_bar a:hover {
+	color: #00cccc;
 }
