@@ -7,7 +7,7 @@
 	<string></string>
 
 	<key>Timestamp Format</key>
-	<string></string>
+	<string>%H:%M</string>
 
 	<key>Override Channel Font</key>
 	<dict>
