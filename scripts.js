@@ -15,6 +15,9 @@ var senderColors = {
 	7: "#953163"
 }
 
+// last sender
+var lastSenderName;
+
 
 // # ################# #
 // # Textual Callbacks #
@@ -41,7 +44,19 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				colorizeColorNumber(inline_nicknames[i]);
 			}
 		}
+
+		// put messages from the same sender into one visual block
+		var senderName = message.querySelector('.sender').textContent;
+		
+		if(senderName === lastSenderName){
+			message.querySelector('.senderContainer').style.display = "none";
+			message.querySelector('.time').style.display = "none";
+		}	
+
+		// update last sender
+		lastSenderName = senderName;
 	}
+
 
 	
 }

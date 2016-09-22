@@ -42,7 +42,7 @@ a:hover {
 /* # #### #*/
 
 div.line {
-	padding: 0.3em;
+	padding: 0.1em 0.3em;
 }
 
 
@@ -72,11 +72,13 @@ span.senderContainer {
 	font-weight: 600;
 	letter-spacing: 0.1em;
 
-	padding-bottom: 0.3em; 
+	padding-bottom: 0.3em;
+	margin-top: 0.3em;
 }
 
 span.message[ltype='privmsg'] span.innerMessage {
-	padding-left: 0.3em;
+	/*padding-left: 0.3em;*/
+	line-height: 0.9em;
 }
 
 div.line[ltype='join'],
