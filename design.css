@@ -45,6 +45,25 @@ span.time {
 	font-weight: 600;
 }
 
+
+/* # ############## #*/
+/* # Message Format #*/
+/* # ############## #*/
+
+span.senderContainer {
+	display: block;
+	text-align: left; 
+
+	font-weight: 600;
+	letter-spacing: 0.1em;
+
+	padding-bottom: 0.3em; 
+}
+
+div[ltype='privmsg'] span.innerMessage {
+	padding-left: 0.3em;
+}
+
 /* ########### #*/
 /* # Topic Bar #*/
 /* ########### #*/
