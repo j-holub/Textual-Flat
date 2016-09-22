@@ -80,6 +80,22 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	
 }
 
+Textual.viewFinishedLoading = function () {
+	Textual.fadeInLoadingScreen(1.00, 1.00);
+
+	setTimeout(function () {
+		Textual.scrollToBottomOfView();
+	}, 300);
+}
+
+Textual.viewFinishedReload = function () {
+	Textual.viewFinishedLoading();
+}
+
+Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName) {
+	// inserts the spinner to the loading screen
+	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
+}
 
 
 // #############
