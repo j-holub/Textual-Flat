@@ -24,6 +24,18 @@ body {
 	z-index: 100;
 }
 
+/* # ##### #*/
+/* # Links #*/
+/* # ##### #*/
+
+a {
+	font-weight: 600;
+	color: #292f33;
+	transition: all 0.2s ease-in-out;
+}
+a:hover {
+	color: #00cccc;
+}
 
 /* # #### #*/
 /* # Line #*/
@@ -113,15 +125,6 @@ div#topic_bar {
 div#topic_bar:hover {
 	padding: 1.2em 1em;
 }
-
-div#topic_bar a {
-	color: #292f33;
-	transition: all 0.2s ease-in-out;
-}
-div#topic_bar a:hover {
-	color: #00cccc;
-}
-
 
 /* ########## */
 /* # Colors # */
