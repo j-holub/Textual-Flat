@@ -75,6 +75,10 @@ div.line[ltype='debug'] span.time {
 	color: #292f33;
 } 
 
+div.line span.inline_nickname {
+	font-weight: 600;
+}
+
 /* ########### #*/
 /* # Topic Bar #*/
 /* ########### #*/

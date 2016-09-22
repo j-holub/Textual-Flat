@@ -28,7 +28,19 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// check if its a private message
 	if(message.getAttribute("ltype") === "privmsg") {
 				
-		colorSender(message);
+		// color the sender
+		// line > p > message > senderContainer > sender
+		var sender = message.childNodes[1].childNodes[3].childNodes[1].childNodes[1];
+		colorizeColorNumber(sender);
+
+		// color any inline_nicknames if present
+		var inline_nicknames = message.querySelectorAll('.inline_nickname');
+		if(inline_nicknames.length > 0) {
+			for (var i = 0; i < inline_nicknames.length; i++) {
+				// colorize the nickname
+				colorizeColorNumber(inline_nicknames[i]);
+			}
+		}
 	}
 
 	
@@ -43,14 +55,12 @@ Textual.newMessagePostedToView = function (lineNumber) {
 /* takes the colornumber property of the sender object, and looks up the color for it
  * in the colorNumbers dictionary. 
  *
- * @param  Object    the line object of the message (must be of the ltype privmsg)
+ * @param  Object    the object to be colored
  * @return void
  */
-var colorSender = function(lineObject) {
-	// line > p > message > senderContainer > sender
-	var sender = lineObject.childNodes[1].childNodes[3].childNodes[1].childNodes[1];
+var colorizeColorNumber = function(object) {
 	// get the color number
-	var colorNumber = sender.getAttribute("colornumber");
+	var colorNumber = object.getAttribute("colornumber");
 	// set the color to the senderColors dictionary accordingly
-	sender.style.color = senderColors[colorNumber % 8];
+	object.style.color = senderColors[colorNumber % 8];
 }
