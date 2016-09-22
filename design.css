@@ -60,7 +60,7 @@ span.senderContainer {
 	padding-bottom: 0.3em; 
 }
 
-div[ltype='privmsg'] span.innerMessage {
+span.message[ltype='privmsg'] span.innerMessage {
 	padding-left: 0.3em;
 }
 
@@ -99,4 +99,13 @@ div#topic_bar a {
 }
 div#topic_bar a:hover {
 	color: #00cccc;
+}
+
+
+/* ########## */
+/* # Colors # */
+/* ########## */
+
+span.sender[mtype="myself"] {
+	color: #00cccc !important;
 }
