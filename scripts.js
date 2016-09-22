@@ -35,8 +35,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	if(message.getAttribute("ltype") === "privmsg") {
 				
 		// color the sender
-		// line > p > message > senderContainer > sender
-		var sender = message.childNodes[1].childNodes[3].childNodes[1].childNodes[1];
+		var sender = message.querySelector('.sender');
 		colorizeColorNumber(sender);
 
 		// color any inline_nicknames if present
