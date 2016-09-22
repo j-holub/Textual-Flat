@@ -51,20 +51,17 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		var senderName = message.querySelector('.sender').textContent;
 		
 		if(senderName === lastSenderName){
+			// remove the sender name
 			message.querySelector('.senderContainer').style.display = "none";
+			// remove the time
 			message.querySelector('.time').style.display = "none";
-
-
+			// thin the padding to visually cluster the lines together
+			message.style.paddingTop = "0.1em";
+			message.previousSibling.style.paddingBottom = "0.1em";
 		}
 		// Sender has changed
 		else{
 			greyBlock = !greyBlock;
-
-			// add padding to the message before to sepereate it visibly from the new message
-			var prevMsg = message.previousSibling;
-			if(prevMsg && prevMsg.getAttribute("ltype") === "privmsg") {
-				prevMsg.style.paddingBottom = "0.5em";
-			}
 		}
 
 		if(greyBlock){
