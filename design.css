@@ -204,6 +204,10 @@ div.line[highlight="true"] {
 	color: #fff;
 }
 
+div.line[highlight="true"] span.time {
+	color: #fff;
+}
+
 /* # ############## #*/
 /* # Loading Screen #*/
 /* # ############## #*/
