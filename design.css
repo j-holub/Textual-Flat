@@ -22,6 +22,8 @@ body {
 	overflow-y: visible;
 
 	z-index: 100;
+	
+	font-weight: 0;
 }
 
 
@@ -95,6 +97,8 @@ span.senderContainer {
 	left: 0;
 	top: 0.5em;
 	bottom: 0;
+
+	overflow: hidden;
 }
 
 span.message[ltype='privmsg'] {
@@ -129,6 +133,7 @@ div.line[ltype='debug'] {
 
 
 div.line span.inline_nickname {
+	font-weight: bolder;
 	font-weight: 600;
 }
 
@@ -154,6 +159,7 @@ div#topic_bar {
 	font-size: 1.1em;
 	line-height: 1.1em;
 	font-weight: 600;
+	font-weight: bolder;
 	text-align: justify;
 
 	transition: all 0.3s ease-in-out;
