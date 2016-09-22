@@ -44,6 +44,8 @@ span.time {
 	letter-spacing: 0.1em;
 	line-height: 1.1em;
 	font-weight: 600;
+
+	color: #292f33;
 }
 
 
@@ -65,15 +67,19 @@ span.message[ltype='privmsg'] span.innerMessage {
 	padding-left: 0.3em;
 }
 
+div.line[ltype='join'],
+div.line[ltype='quit'],
+div.line[ltype='topic'],
+div.line[ltype='nick'] {
+	color: #888;
+}
+
 
 div.line[ltype='debug'] {
 	padding: 0.2em 0.3em;
 	color: #555;
 	background-color: #FAFAFA;
 }
-div.line[ltype='debug'] span.time {
-	color: #292f33;
-} 
 
 div.line span.inline_nickname {
 	font-weight: 600;
