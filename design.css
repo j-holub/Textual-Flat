@@ -183,6 +183,18 @@ span.sender[mtype="myself"] {
 	color: #00cccc !important;
 }
 
+/* # ########## #*/
+/* # Highlights #*/
+/* # ########## #*/
+
+div.line[highlight="true"] {
+	background-color: #00cccc;
+	color: #fff;
+
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
+
 /* # ############## #*/
 /* # Loading Screen #*/
 /* # ############## #*/
