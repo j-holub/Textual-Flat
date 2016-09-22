@@ -65,6 +65,18 @@ div.line[ltype="privmsg"] span.time {
 	padding-top: 0.5em;
 }
 
+div.line[ltype='debug'] .time {
+	color: #FFF;
+}
+
+div.line[ltype='join'] span.time,
+div.line[ltype='quit'] span.time,
+div.line[ltype='topic'] span.time,
+div.line[ltype='nick'] span.time,
+div.line[ltype='mode'] span.time {
+	color: #888;
+}
+
 /* # ############## #*/
 /* # Message Format #*/
 /* # ############## #*/
@@ -91,16 +103,20 @@ span.message[ltype='privmsg'] span.innerMessage {
 div.line[ltype='join'],
 div.line[ltype='quit'],
 div.line[ltype='topic'],
-div.line[ltype='nick'] {
+div.line[ltype='nick'],
+div.line[ltype='mode'] {
 	color: #888;
+
+	padding: 0.3em 0.3em;
 }
 
 
 div.line[ltype='debug'] {
-	padding: 0.2em 0.3em;
-	color: #555;
-	background-color: #FAFAFA;
+	padding: 0.3em 0.3em;
+	color: #FFF;
+	background-color: #DADADA;
 }
+
 
 div.line span.inline_nickname {
 	font-weight: 600;
