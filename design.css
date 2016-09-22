@@ -42,7 +42,8 @@ a:hover {
 /* # #### #*/
 
 div.line {
-	padding: 0.1em 0.3em;
+	position: relative;
+	padding: 0 0.3em;
 }
 
 
@@ -60,6 +61,9 @@ span.time {
 	color: #292f33;
 }
 
+div.line[ltype="privmsg"] span.time {
+	padding-top: 0.5em;
+}
 
 /* # ############## #*/
 /* # Message Format #*/
@@ -70,16 +74,19 @@ span.senderContainer {
 	text-align: left; 
 
 	font-weight: 600;
+	line-height: 1.1em;
 	letter-spacing: 0.1em;
 
-	padding-bottom: 0.3em;
-	margin-top: 0.3em;
+	padding-bottom: 0.2em;
+	/* the bottom padding of the last line of a message is set by JavaScript*/
+	padding-top: 0.5em; 
 }
 
 span.message[ltype='privmsg'] span.innerMessage {
 	/*padding-left: 0.3em;*/
-	line-height: 0.9em;
+	line-height: 1.2em;
 }
+
 
 div.line[ltype='join'],
 div.line[ltype='quit'],
@@ -97,6 +104,10 @@ div.line[ltype='debug'] {
 
 div.line span.inline_nickname {
 	font-weight: 600;
+}
+
+div.greyBackground {
+	background-color: #FAFAFA;
 }
 
 /* ########### #*/

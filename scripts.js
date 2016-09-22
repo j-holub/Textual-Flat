@@ -18,6 +18,9 @@ var senderColors = {
 // last sender
 var lastSenderName;
 
+// grey Message Block for alternating colors to have a better visibility
+var greyBlock = false;
+
 
 // # ################# #
 // # Textual Callbacks #
@@ -51,7 +54,23 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		if(senderName === lastSenderName){
 			message.querySelector('.senderContainer').style.display = "none";
 			message.querySelector('.time').style.display = "none";
-		}	
+
+
+		}
+		// Sender has changed
+		else{
+			greyBlock = !greyBlock;
+
+			// add padding to the message before to sepereate it visibly from the new message
+			var prevMsg = message.previousSibling;
+			if(prevMsg && prevMsg.getAttribute("ltype") === "privmsg") {
+				prevMsg.style.paddingBottom = "0.5em";
+			}
+		}
+
+		if(greyBlock){
+			message.className += " greyBackground";
+		}
 
 		// update last sender
 		lastSenderName = senderName;
