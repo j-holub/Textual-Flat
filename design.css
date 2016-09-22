@@ -95,7 +95,7 @@ span.senderContainer {
 }
 
 span.message[ltype='privmsg'] span.innerMessage {
-	/*padding-left: 0.3em;*/
+	padding-left: 0.3em;
 	line-height: 1.2em;
 }
 
