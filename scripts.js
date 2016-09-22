@@ -91,6 +91,10 @@ Textual.viewFinishedReload = function () {
 Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName) {
 	// inserts the spinner to the loading screen
 	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
+
+	// make the content below the topic bar visible
+	var tBarHeight = document.getElementById('topic_bar').offsetHeight;
+	document.body.style.paddingTop = tBarHeight + "px";
 }
 
 
