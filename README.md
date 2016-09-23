@@ -24,3 +24,6 @@ A flat and modern theme for [Textual IRC](https://www.codeux.com/textual/).
 
 This is still a work in progress. It supports all the features I need so far, but there could be things missing. If you happen to notice that, I kindly ask to you open an issue about it.
    
+## Licence
+
+[MIT Licence](LICENCE.md)
