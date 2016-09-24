@@ -93,8 +93,10 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
 
 	// make the content below the topic bar visible
-	var tBarHeight = document.getElementById('topic_bar').offsetHeight;
-	document.body.style.paddingTop = tBarHeight + "px";
+	var tBar = document.getElementById('topic_bar');
+	if(tBar){
+		document.body.style.paddingTop = tBar.offsetHeight + "px";
+	}
 }
 
 
