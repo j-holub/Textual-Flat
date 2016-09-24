@@ -11,6 +11,7 @@ A flat and modern theme for [Textual IRC](https://www.codeux.com/textual/).
 *  Does **not** force a font on you. I suggest a thin version of *Helvetica Neue* or any thin font in gernal. For example [Montserrat](https://www.fontsquirrel.com/fonts/montserrat) is a very nice choice, too.
 *  Sender names on the *left*, time on the *right*. Nice and sleek
 *  Multiple messages from the same user only display the username for the first message
+*  *"Topic set"* occurances are deleted if the that topic has already been set
 *  Beautiful highlights and inline images
 
 ## Installing

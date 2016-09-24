@@ -21,6 +21,8 @@ var lastSenderName;
 // grey Message Block for alternating colors to have a better visibility
 var greyBlock = false;
 
+// channel topic
+var channelTopic = "";
 
 // # ################# #
 // # Textual Callbacks #
@@ -31,7 +33,8 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// get the message object
 	var message = document.getElementById('line-' + lineNumber);
 
-	// check if its a private message
+	// # ---------------- #
+	// # Private Messages #
 	if(message.getAttribute("ltype") === "privmsg") {
 				
 		// color the sender
@@ -72,6 +75,34 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		lastSenderName = senderName;
 	}
 
+	// # ------------ #
+	// # Topic Change #
+	if(message.getAttribute("ltype") === "topic"){
+
+		// get the command code
+		var command = message.getAttribute("command");
+
+		// 333 is a "Set By ..." message, which means we had a "Topic is ..." Message before
+		// might be the same as before
+		if(command === "333") {
+			// get the topic message
+			var topicMessage = message.previousSibling;
+			// just to make sure we really had a 332 ("Topic set ...") message
+			if(topicMessage.getAttribute("command") === "332"){
+				// get the topic
+				var topic = topicMessage.querySelector('.message').textContent.trim().replace('Topic is ', '');
+
+				// the topic was already set
+				if(topic === channelTopic) {
+					// remove both messages
+					topicMessage.parentNode.removeChild(topicMessage);
+					message.parentNode.removeChild(message);
+				}
+			}
+		}
+		
+	}
+
 
 	
 }
@@ -92,11 +123,20 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 	// inserts the spinner to the loading screen
 	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
 
-	// make the content below the topic bar visible
 	var tBar = document.getElementById('topic_bar');
-	if(tBar){
+	if(tBar){	
+		// make the content below the topic bar visible
 		document.body.style.paddingTop = tBar.offsetHeight + "px";
+
+		// set the channelTopic variable
+		channelTopic =  tBar.textContent;
 	}
+}
+
+
+Textual.topicBarValueChanged = function(newTopic) {
+	// update the channelTopic state variable
+	channelTopic = newTopic;
 }
 
 
