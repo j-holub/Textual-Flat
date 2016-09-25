@@ -67,10 +67,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			greyBlock = !greyBlock;
 		}
 
-		if(greyBlock){
-			message.className += " greyBackground";
-		}
-
+	
 
 		// add wrapper for the zoom animation effect to any inline image
 		var possibleInlineImages = message.getElementsByClassName('inlineImageCell');
@@ -87,10 +84,14 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	}
 	// message was not a private message
 	else{
-		// whatever message it was, the sender was no user
-		// clear the lastSnederName to make the Nickname visible again on the next private message
-		// if it happens to be from the same user
-		lastSenderName = "";
+		// whatever message it was, the sender was no user but the client/server
+		// set lastSenderName to "textualClient" to continue the color alternation through
+		// client messages
+
+		if(!(lastSenderName === "textualClient")){
+			lastSenderName = "textualClient";
+			greyBlock = !greyBlock;
+		}
 	}
 
 	// # ------------ #
@@ -106,10 +107,9 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			// get the topic message
 			var topicMessage = message.previousSibling;
 			// just to make sure we really had a 332 ("Topic set ...") message
-			if(topicMessage.getAttribute("command") === "332"){
+			if(topicMessage && topicMessage.getAttribute("command") === "332"){
 				// get the topic
 				var topic = topicMessage.querySelector('.message').textContent.trim().replace('Topic is ', '');
-
 				// the topic was already set
 				if(topic === channelTopic) {
 					// remove both messages
@@ -119,6 +119,20 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			}
 		}
 		
+	}
+
+	
+	// if the previous message was a debug notice set greyBlock to false to color
+	// the message in white
+	var prevMessage = message.previousSibling;
+	if(prevMessage && prevMessage.getAttribute("ltype") === "debug"){
+		greyBlock = false;
+	}
+
+
+	// color the message if needed
+	if(greyBlock){
+		message.className += " greyBackground";
 	}
 
 
