@@ -85,6 +85,13 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		// update last sender
 		lastSenderName = senderName;
 	}
+	// message was not a private message
+	else{
+		// whatever message it was, the sender was no user
+		// clear the lastSnederName to make the Nickname visible again on the next private message
+		// if it happens to be from the same user
+		lastSenderName = "";
+	}
 
 	// # ------------ #
 	// # Topic Change #
