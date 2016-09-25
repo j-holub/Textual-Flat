@@ -24,6 +24,9 @@ var greyBlock = false;
 // channel topic
 var channelTopic = "";
 
+// states that the view has finished loading. Needed for animations
+var finishedLoading = false;
+
 // # ################# #
 // # Textual Callbacks #
 // # ################# #
@@ -103,16 +106,24 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		
 	}
 
-
+	// disable animations for messages that already have been there while loading
+	if(!finishedLoading){
+		message.style.animation = "none";
+	}
 	
 }
 
 Textual.viewFinishedLoading = function () {
 	Textual.fadeInLoadingScreen(1.00, 1.00);
 
+
 	setTimeout(function () {
 		Textual.scrollToBottomOfView();
-	}, 300);
+	}, 100);
+
+	setTimeout(function() {
+		finishedLoading = true;
+	}, 30);
 }
 
 Textual.viewFinishedReload = function () {
