@@ -97,7 +97,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// # ------------ #
 	// # Topic Change #
 	if(message.getAttribute("ltype") === "topic"){
-
 		// get the command code
 		var command = message.getAttribute("command");
 
@@ -109,8 +108,11 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			// just to make sure we really had a 332 ("Topic set ...") message
 			if(topicMessage && topicMessage.getAttribute("command") === "332"){
 				// get the topic
-				var topic = topicMessage.querySelector('.message').textContent.trim().replace('Topic is ', '');
-				// the topic was already set
+				var topic = topicMessage.querySelector('.message').textContent.replace('Topic is', '').trim()
+				// generalize the whitespaces
+				topic = topic.replace(/\s/g, '');
+			
+				// the topic was already set	
 				if(topic === channelTopic) {
 					// remove both messages
 					topicMessage.parentNode.removeChild(topicMessage);
@@ -161,14 +163,14 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 		document.body.style.paddingTop = tBar.offsetHeight + "px";
 
 		// set the channelTopic variable
-		channelTopic =  tBar.textContent;
+		channelTopic =  tBar.textContent.replace(/\s/g, '');
 	}
 }
 
 
 Textual.topicBarValueChanged = function(newTopic) {
 	// update the channelTopic state variable
-	channelTopic = newTopic;
+	channelTopic = newTopic.replace(/\s/g, '');;
 }
 
 
