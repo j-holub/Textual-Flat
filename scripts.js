@@ -24,9 +24,6 @@ var greyBlock = false;
 // channel topic
 var channelTopic = "";
 
-// states that the view has finished loading. Needed for animations
-var finishedLoading = false;
-
 // # ################# #
 // # Textual Callbacks #
 // # ################# #
@@ -74,6 +71,17 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			message.className += " greyBackground";
 		}
 
+
+		// add wrapper for the zoom animation effect to any inline image
+		var possibleInlineImages = message.getElementsByClassName('inlineImageCell');
+		if(possibleInlineImages.length > 0){
+			for(var i = 0; i < possibleInlineImages.length; i++){
+				// add the wrapper
+				addInlineImageWrapper(possibleInlineImages[i]);
+			}
+		}
+
+
 		// update last sender
 		lastSenderName = senderName;
 	}
@@ -106,24 +114,16 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		
 	}
 
-	// disable animations for messages that already have been there while loading
-	if(!finishedLoading){
-		message.style.animation = "none";
-	}
+
 	
 }
 
 Textual.viewFinishedLoading = function () {
 	Textual.fadeInLoadingScreen(1.00, 1.00);
 
-
 	setTimeout(function () {
 		Textual.scrollToBottomOfView();
-	}, 100);
-
-	setTimeout(function() {
-		finishedLoading = true;
-	}, 30);
+	}, 300);
 }
 
 Textual.viewFinishedReload = function () {
@@ -166,4 +166,22 @@ var colorizeColorNumber = function(object) {
 	var colorNumber = object.getAttribute("colornumber");
 	// set the color to the senderColors dictionary accordingly
 	object.style.color = senderColors[colorNumber % 8];
+}
+
+/* takes an .inlineImageCell DOM Node and insertes a .imageWrapper div around the image
+ * to enable a zoom effect for the image
+ *
+ * @param  .inlineImageCell DOM object
+ * @return void
+ */
+var addInlineImageWrapper = function(inlineImageCell) {
+	// get the link containing the image
+	var imgLinkNode = inlineImageCell.querySelector('a');
+	// create a wrapper element
+	var wrapper = document.createElement("div");
+	wrapper.className += "imageWrapper";
+
+	// put the wrapper around the image
+	inlineImageCell.replaceChild(wrapper, imgLinkNode);
+	wrapper.appendChild(imgLinkNode);
 }
