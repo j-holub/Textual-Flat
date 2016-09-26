@@ -127,7 +127,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// if the previous message was a debug notice set greyBlock to false to color
 	// the message in white
 	var prevMessage = message.previousSibling;
-	if(prevMessage && prevMessage.getAttribute("ltype") === "debug"){
+	if(prevMessage && (typeof prevMessage === "object") && (prevMessage.getAttribute("ltype") === "debug")){
 		greyBlock = false;
 	}
 
