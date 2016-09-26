@@ -70,6 +70,7 @@ div.line[ltype='debug'] .time {
 }
 
 div.line[ltype='join'] span.time,
+div.line[ltype='part'] span.time,
 div.line[ltype='quit'] span.time,
 div.line[ltype='topic'] span.time,
 div.line[ltype='nick'] span.time,
@@ -115,6 +116,7 @@ span.message[ltype='privmsg'] {
 
 
 div.line[ltype='join'],
+div.line[ltype='part'],
 div.line[ltype='quit'],
 div.line[ltype='topic'],
 div.line[ltype='nick'],
