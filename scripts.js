@@ -142,7 +142,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 }
 
 Textual.viewFinishedLoading = function () {
-	Textual.fadeInLoadingScreen(1.00, 1.00);
+	Textual.fadeOutLoadingScreen(1.00, 1.00);
 
 	setTimeout(function () {
 		Textual.scrollToBottomOfView();
