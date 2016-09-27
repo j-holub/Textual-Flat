@@ -136,8 +136,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	if(greyBlock){
 		message.className += " greyBackground";
 	}
-
-
 	
 }
 
@@ -160,7 +158,7 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 	var tBar = document.getElementById('topic_bar');
 	if(tBar){	
 		// make the content below the topic bar visible
-		document.body.style.paddingTop = tBar.offsetHeight + "px";
+		document.body.style.marginTop = tBar.clientHeight + "px";
 
 		// set the channelTopic variable
 		channelTopic =  tBar.textContent.replace(/\s/g, '');
