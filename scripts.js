@@ -123,6 +123,18 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		
 	}
 
+	// # ----------- #
+	// # Join / Part #
+	if(message.getAttribute("ltype") === "join" || message.getAttribute("ltype") === "part" || message.getAttribute("ltype") === "quit"){
+		// hide your own join and part messages
+		app.localUserNickname(function(nickname){
+			// query Nickname and Nickname_
+			var nicknameRegex = new RegExp(nickname + "_?");
+			if(message.querySelector('b').textContent.search(nicknameRegex) != -1){
+				message.parentNode.removeChild(message);
+			}
+		});
+	}
 	
 	// if the previous message was a debug notice set greyBlock to false to color
 	// the message in white
