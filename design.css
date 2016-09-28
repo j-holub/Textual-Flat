@@ -102,7 +102,8 @@ span.senderContainer {
 	overflow: hidden;
 }
 
-span.message[ltype='privmsg'] {
+span.message[ltype='privmsg'],
+span.message[ltype='action'] {
 	display: flex;
 	align-items: center;
 
