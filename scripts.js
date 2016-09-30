@@ -44,10 +44,19 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		// color any inline_nicknames if present
 		var inline_nicknames = message.querySelectorAll('.inline_nickname');
 		if(inline_nicknames.length > 0) {
-			for (var i = 0; i < inline_nicknames.length; i++) {
-				// colorize the nickname
-				colorizeColorNumber(inline_nicknames[i]);
-			}
+			app.localUserNickname(function(username) {
+				for (var i = 0; i < inline_nicknames.length; i++) {
+					// check if it is the users name and color it in the user color 
+					if(inline_nicknames[i].textContent.toLowerCase().match(username.toLowerCase())){
+						inline_nicknames[i].style.color = "#00cccc";
+					}
+					// color other users according to their color number
+					else{
+						// colorize the nickname
+						colorizeColorNumber(inline_nicknames[i]);
+					}
+				}
+			});
 		}
 
 		// put messages from the same sender into one visual block
