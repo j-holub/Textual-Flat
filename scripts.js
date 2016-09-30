@@ -69,7 +69,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			message.querySelector('.time').style.display = "none";
 			// thin the padding to visually cluster the lines together
 			message.style.paddingTop = "0.1em";
-			message.previousSibling.style.paddingBottom = "0.1em";
+			previousMessage(message).style.paddingBottom = "0.1em";
 		}
 		// Sender has changed
 		else{
@@ -147,7 +147,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	
 	// if the previous message was a debug notice set greyBlock to false to color
 	// the message in white
-	var prevMessage = message.previousSibling;
+	var prevMessage = previousMessage(message);
 	if(prevMessage && (typeof prevMessage === "object") && (prevMessage.getAttribute("ltype") === "debug")){
 		greyBlock = false;
 	}
@@ -157,6 +157,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	if(greyBlock){
 		message.className += " greyBackground";
 	}
+
 	
 }
 
@@ -226,4 +227,21 @@ var addInlineImageWrapper = function(inlineImageCell) {
 	// put the wrapper around the image
 	inlineImageCell.replaceChild(wrapper, imgLinkNode);
 	wrapper.appendChild(imgLinkNode);
+}
+
+/* gets the previous message
+ * sometimes non-message divs are between messages and this function will skip them and get
+ * the message before that div
+ *
+ * @param  the message div object
+ * @return the div object of the previous message
+ */
+var previousMessage =  function(message) {
+	var prev = message.previousSibling;
+	if(prev && (prev.id === "mark" || prev.id === "historic_messages")){
+		return prev.previousSibling;
+	}
+	else{
+		return prev;
+	}
 }
