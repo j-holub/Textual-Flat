@@ -225,6 +225,10 @@ Textual.topicBarValueChanged = function(newTopic) {
 var colorizeColorNumber = function(object) {
 	// get the color number
 	var colorNumber = object.getAttribute("colornumber");
+	// sometimes negative colornumbers may appear
+	if(colorNumber < 0){
+		colorNumber *= -1;
+	}
 	// set the color to the senderColors dictionary accordingly
 	object.style.color = senderColors[colorNumber % 8];
 }
