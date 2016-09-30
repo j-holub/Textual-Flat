@@ -223,6 +223,42 @@ div.line[highlight="true"] span.time {
 	color: #fff;
 }
 
+
+/* # ########## #*/
+/* # Animations #*/
+/* # ########## #*/
+
+span.letterCorrection{
+	animation: letterCorrection 0.2s cubic-bezier(0,.92,.81,.78);
+}
+
+@keyframes letterCorrection {
+	0%{
+		opacity: 0;
+		padding-left: 10em;
+	}
+	100%{
+		opacity: 1;
+		padding-left: 0;
+	}
+}
+
+div.lineCorrection {
+	animation: lineCorrection 0.8s cubic-bezier(.5,.2,.6,1.25);
+}
+
+@keyframes lineCorrection {
+	0%{
+		background-color: rgba(0, 204, 204, 0);
+	}
+	20%{
+		background-color: rgba(0, 204, 204, 0.7);	
+	}
+	100%{
+		background-color: rgba(0, 204, 204, 0);
+	}
+}
+
 /* # ############## #*/
 /* # Loading Screen #*/
 /* # ############## #*/

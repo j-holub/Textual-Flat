@@ -36,60 +36,79 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// # ---------------- #
 	// # Private Messages #
 	if(message.getAttribute("ltype") === "privmsg") {
-				
-		// color the sender
-		var sender = message.querySelector('.sender');
-		colorizeColorNumber(sender);
 
-		// color any inline_nicknames if present
-		var inline_nicknames = message.querySelectorAll('.inline_nickname');
-		if(inline_nicknames.length > 0) {
-			app.localUserNickname(function(username) {
-				for (var i = 0; i < inline_nicknames.length; i++) {
-					// check if it is the users name and color it in the user color 
-					if(inline_nicknames[i].textContent.toLowerCase().match(username.toLowerCase())){
-						inline_nicknames[i].style.color = "#00cccc";
-					}
-					// color other users according to their color number
-					else{
-						// colorize the nickname
-						colorizeColorNumber(inline_nicknames[i]);
-					}
-				}
-			});
+		// first check if the message is a correction
+		var messageContent = message.getElementsByClassName('innerMessage')[0].textContent.trim();
+		// if it's a single character it most likely was a correction to the previous line
+		if(messageContent.length == 1){
+			// add it to the previous line
+			var prevMessage = previousMessage(message).getElementsByClassName('innerMessage')[0];
+			prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
+			prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
+			// animate the previous line
+			previousMessage(message).classList.add("lineCorrection");
+			// delete the original message
+			message.parentNode.removeChild(message);
 		}
-
-		// put messages from the same sender into one visual block
-		var senderName = message.querySelector('.sender').textContent;
-		
-		if(senderName === lastSenderName){
-			// remove the sender name
-			message.querySelector('.senderContainer').style.display = "none";
-			// remove the time
-			message.querySelector('.time').style.display = "none";
-			// thin the padding to visually cluster the lines together
-			message.style.paddingTop = "0.1em";
-			previousMessage(message).style.paddingBottom = "0.1em";
-		}
-		// Sender has changed
+		// if it is longer, treat it as a normal message
 		else{
-			greyBlock = !greyBlock;
-		}
 
-	
+				
+			// color the sender
+			var sender = message.querySelector('.sender');
+			colorizeColorNumber(sender);
 
-		// add wrapper for the zoom animation effect to any inline image
-		var possibleInlineImages = message.getElementsByClassName('inlineImageCell');
-		if(possibleInlineImages.length > 0){
-			for(var i = 0; i < possibleInlineImages.length; i++){
-				// add the wrapper
-				addInlineImageWrapper(possibleInlineImages[i]);
+			// color any inline_nicknames if present
+			var inline_nicknames = message.querySelectorAll('.inline_nickname');
+			if(inline_nicknames.length > 0) {
+				app.localUserNickname(function(username) {
+					for (var i = 0; i < inline_nicknames.length; i++) {
+						// check if it is the users name and color it in the user color 
+						if(inline_nicknames[i].textContent.toLowerCase().match(username.toLowerCase())){
+							inline_nicknames[i].style.color = "#00cccc";
+						}
+						// color other users according to their color number
+						else{
+							// colorize the nickname
+							colorizeColorNumber(inline_nicknames[i]);
+						}
+					}
+				});
 			}
+
+			// put messages from the same sender into one visual block
+			var senderName = message.querySelector('.sender').textContent;
+			
+			if(senderName === lastSenderName){
+				// remove the sender name
+				message.querySelector('.senderContainer').style.display = "none";
+				// remove the time
+				message.querySelector('.time').style.display = "none";
+				// thin the padding to visually cluster the lines together
+				message.style.paddingTop = "0.1em";
+				previousMessage(message).style.paddingBottom = "0.1em";
+			}
+			// Sender has changed
+			else{
+				greyBlock = !greyBlock;
+			}
+
+		
+
+			// add wrapper for the zoom animation effect to any inline image
+			var possibleInlineImages = message.getElementsByClassName('inlineImageCell');
+			if(possibleInlineImages.length > 0){
+				for(var i = 0; i < possibleInlineImages.length; i++){
+					// add the wrapper
+					addInlineImageWrapper(possibleInlineImages[i]);
+				}
+			}
+
+
+			// update last sender
+			lastSenderName = senderName;
+
 		}
-
-
-		// update last sender
-		lastSenderName = senderName;
 	}
 	// message was not a private message
 	else{
@@ -158,7 +177,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		message.className += " greyBackground";
 	}
 
-	
 }
 
 Textual.viewFinishedLoading = function () {
