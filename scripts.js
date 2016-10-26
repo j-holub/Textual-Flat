@@ -43,12 +43,14 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		if(messageContent.length == 1){
 			// add it to the previous line
 			var prevMessage = previousMessage(message).getElementsByClassName('innerMessage')[0];
-			prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
-			prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
-			// animate the previous line
-			previousMessage(message).classList.add("lineCorrection");
-			// delete the original message
-			message.parentNode.removeChild(message);
+			if(prevMessage){
+				prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
+				prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
+				// animate the previous line
+				previousMessage(message).classList.add("lineCorrection");
+				// delete the original message
+				message.parentNode.removeChild(message);
+			}
 		}
 		// if it is longer, treat it as a normal message
 		else{
