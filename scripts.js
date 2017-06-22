@@ -37,29 +37,26 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// # Private Messages #
 	if(message.getAttribute("ltype") === "privmsg") {
 
-		let senderName = message.querySelector('.sender').textContent;
+		let senderName     = message.querySelector('.sender').textContent;
+		let prevMessage    = previousMessage(message);
+		let prevType       = prevMessage.getAttribute("ltype");
+		let lastSenderName = prevMessage && prevType === "privmsg" ? prevMessage.querySelector('.sender').textContent : null;
+
 		// first check if the message is a correction
 		var messageContent = message.getElementsByClassName('innerMessage')[0].textContent.trim();
 		// if it's a single character it most likely was a correction to the previous line
 		if(messageContent.length == 1){
 			// add it to the previous line
-			let prevMessage = previousMessage(message);
-
-
-			if(prevMessage){
-				// get previous message type
-				let prevType  = prevMessage.getAttribute("ltype");
+			if(lastSenderName){
 				// if the previous message was from the same sender as this message
 				// add the single character to the previous message
-				if(prevType === "privmsg" && prevMessage.querySelector('.sender').textContent === senderName){
-					prevMessage = prevMessage.getElementsByClassName('innerMessage')[0];
-					prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
-					prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
-					// animate the previous line
-					previousMessage(message).classList.add("lineCorrection");
-					// delete the original message
-					message.parentNode.removeChild(message);
-				}
+				prevMessage = prevMessage.getElementsByClassName('innerMessage')[0];
+				prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
+				prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
+				// animate the previous line
+				previousMessage(message).classList.add("lineCorrection");
+				// delete the original message
+				message.parentNode.removeChild(message);
 			}
 		}
 		// if it is longer, treat it as a normal message
@@ -85,20 +82,21 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				});
 			}
 
-			if(senderName === lastSenderName){
-				// remove the sender name
-				message.querySelector('.senderContainer').style.display = "none";
-				// remove the time
-				message.querySelector('.time').style.display = "none";
-				// thin the padding to visually cluster the lines together
-				message.style.paddingTop = "0.1em";
-				previousMessage(message).style.paddingBottom = "0.1em";
+			if(lastSenderName){
+				if(senderName === lastSenderName){
+					// remove the sender name
+					message.querySelector('.senderContainer').style.display = "none";
+					// remove the time
+					message.querySelector('.time').style.display = "none";
+					// thin the padding to visually cluster the lines together
+					message.style.paddingTop = "0.1em";
+					previousMessage(message).style.paddingBottom = "0.1em";
+				}
+				// Sender has changed
+				else{
+					greyBlock = !greyBlock;
+				}
 			}
-			// Sender has changed
-			else{
-				greyBlock = !greyBlock;
-			}
-
 
 
 			// add wrapper for the zoom animation effect to any inline image
@@ -109,11 +107,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 					addInlineImageWrapper(possibleInlineImages[i]);
 				}
 			}
-
-
-			// update last sender
-			lastSenderName = senderName;
-
 		}
 	}
 	// message was not a private message
@@ -266,10 +259,15 @@ var addInlineImageWrapper = function(inlineImageCell) {
  */
 var previousMessage =  function(message) {
 	var prev = message.previousSibling;
-	if(prev && (prev.id === "mark" || prev.id === "historic_messages")){
-		return prev.previousSibling;
+	if(prev){
+		if(prev.id === "mark" || prev.id === "historic_messages"){
+			return previousMessage(prev.previousSibling);
+		}
+		else{
+			return prev;
+		}
 	}
 	else{
-		return prev;
+		return null;
 	}
 }
