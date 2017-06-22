@@ -37,35 +37,42 @@ Textual.newMessagePostedToView = function (lineNumber) {
 	// # Private Messages #
 	if(message.getAttribute("ltype") === "privmsg") {
 
+		let senderName = message.querySelector('.sender').textContent;
 		// first check if the message is a correction
 		var messageContent = message.getElementsByClassName('innerMessage')[0].textContent.trim();
 		// if it's a single character it most likely was a correction to the previous line
 		if(messageContent.length == 1){
 			// add it to the previous line
-			var prevMessage = previousMessage(message).getElementsByClassName('innerMessage')[0];
+			let prevMessage = previousMessage(message);
+
+
 			if(prevMessage){
-				prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
-				prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
-				// animate the previous line
-				previousMessage(message).classList.add("lineCorrection");
-				// delete the original message
-				message.parentNode.removeChild(message);
+				// get previous message type
+				let prevType  = prevMessage.getAttribute("ltype");
+				// if the previous message was from the same sender as this message
+				// add the single character to the previous message
+				if(prevType === "privmsg" && prevMessage.querySelector('.sender').textContent === senderName){
+					prevMessage = prevMessage.getElementsByClassName('innerMessage')[0];
+					prevMessage.innerHTML = prevMessage.textContent.trim() + "<span class=\"correct\">" + messageContent + "</span>";
+					prevMessage.getElementsByClassName('correct')[0].classList.add("letterCorrection");
+					// animate the previous line
+					previousMessage(message).classList.add("lineCorrection");
+					// delete the original message
+					message.parentNode.removeChild(message);
+				}
 			}
 		}
 		// if it is longer, treat it as a normal message
 		else{
-
-				
 			// color the sender
-			var sender = message.querySelector('.sender');
-			colorizeColorNumber(sender);
+			colorizeColorNumber(message.querySelector('.sender'));
 
 			// color any inline_nicknames if present
 			var inline_nicknames = message.querySelectorAll('.inline_nickname');
 			if(inline_nicknames.length > 0) {
 				app.localUserNickname(function(username) {
 					for (var i = 0; i < inline_nicknames.length; i++) {
-						// check if it is the users name and color it in the user color 
+						// check if it is the users name and color it in the user color
 						if(inline_nicknames[i].textContent.toLowerCase().match(username.toLowerCase())){
 							inline_nicknames[i].style.color = "#00cccc";
 						}
@@ -78,9 +85,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				});
 			}
 
-			// put messages from the same sender into one visual block
-			var senderName = message.querySelector('.sender').textContent;
-			
 			if(senderName === lastSenderName){
 				// remove the sender name
 				message.querySelector('.senderContainer').style.display = "none";
@@ -95,7 +99,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				greyBlock = !greyBlock;
 			}
 
-		
+
 
 			// add wrapper for the zoom animation effect to any inline image
 			var possibleInlineImages = message.getElementsByClassName('inlineImageCell');
@@ -141,8 +145,8 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				var topic = topicMessage.querySelector('.message').textContent.replace('Topic is', '').trim()
 				// generalize the whitespaces
 				topic = topic.replace(/\s/g, '');
-			
-				// the topic was already set	
+
+				// the topic was already set
 				if(topic === channelTopic) {
 					// remove both messages
 					topicMessage.parentNode.removeChild(topicMessage);
@@ -150,7 +154,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				}
 			}
 		}
-		
+
 	}
 
 	// # ----------- #
@@ -165,7 +169,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			}
 		});
 	}
-	
+
 	// if the previous message was a debug notice set greyBlock to false to color
 	// the message in white
 	var prevMessage = previousMessage(message);
@@ -198,7 +202,7 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
 
 	var tBar = document.getElementById('topic_bar');
-	if(tBar){	
+	if(tBar){
 		// make the content below the topic bar visible
 		document.body.style.marginTop = tBar.clientHeight + "px";
 
@@ -219,7 +223,7 @@ Textual.topicBarValueChanged = function(newTopic) {
 // #############
 
 /* takes the colornumber property of the sender object, and looks up the color for it
- * in the colorNumbers dictionary. 
+ * in the colorNumbers dictionary.
  *
  * @param  Object    the object to be colored
  * @return void
