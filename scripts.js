@@ -14,6 +14,7 @@ let importFile = function(file) {
 importFile('Data/Resources/js/jquery.3.2.1.min.js');
 
 
+importFile('Data/Resources/js/util.js');
 
 // #################
 // # Configuration #
@@ -47,7 +48,7 @@ var channelTopic = "";
 Textual.newMessagePostedToView = function (lineNumber) {
 
 	// get the message object
-	var message = document.getElementById('line-' + lineNumber);
+	let message = $('#line-' + lineNumber);
 
 	// # ---------------- #
 	// # Private Messages #
@@ -263,26 +264,4 @@ var addInlineImageWrapper = function(inlineImageCell) {
 	// put the wrapper around the image
 	inlineImageCell.replaceChild(wrapper, imgLinkNode);
 	wrapper.appendChild(imgLinkNode);
-}
-
-/* gets the previous message
- * sometimes non-message divs are between messages and this function will skip them and get
- * the message before that div
- *
- * @param  the message div object
- * @return the div object of the previous message
- */
-var previousMessage =  function(message) {
-	var prev = message.previousSibling;
-	if(prev){
-		if(prev.id === "mark" || prev.id === "historic_messages"){
-			return previousMessage(prev.previousSibling);
-		}
-		else{
-			return prev;
-		}
-	}
-	else{
-		return null;
-	}
 }
