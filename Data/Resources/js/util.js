@@ -1,27 +1,9 @@
-/* Gets the previous message to a message
- *
- * @param  message {DOM Element} - the message to get the previous message of
- *
- * @return void
- */
-function getPreviousMessage(message) {
-	let prevMessage = $(message).prev();
-	// check wether the last one was the historic messages block
-	// and returns its last child if
-	if(prevMessage.attr('id') === 'historic_messages'){
-		return $('#historic_messages div.line:last-child');
-	}
-	else{
-		return prevMessage;
-	}
-}
 
-
-/* Returns the color HEX for the sendernumber of a message
+/* Colorizes the sendername
  *
  * @param  sender {DOM Element} - the message
  *
- * @return colorHEX {String}
+ * @return void
  */
 var colorizeSender = function(message) {
 	// colors for the colornumber property
