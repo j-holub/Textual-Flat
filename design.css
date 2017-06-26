@@ -203,10 +203,6 @@ div.imageWrapper {
 /* # Colors # */
 /* ########## */
 
-span.sender[mtype="myself"] {
-	color: #00cccc !important;
-}
-
 div.greyBackground {
 	background-color: #FAFAFA;
 }

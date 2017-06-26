@@ -14,8 +14,8 @@ let importFile = function(file) {
 importFile('Data/Resources/js/jquery.3.2.1.min.js');
 
 // Modules
+importFile('Data/Resources/js/colors.js');
 importFile('Data/Resources/js/messages.js');
-importFile('Data/Resources/js/util.js');
 
 // #################
 // # Configuration #
@@ -48,6 +48,8 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		case 'privmsg':
 			// colorize the sender
 			colorizeSender(message);
+			// colorize inline mentions
+			colorizeInlineMentions(message);
 			// get some information
 			let sender = getSender(message);
 			let lastMessage = getPreviousMessage(message);
