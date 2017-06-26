@@ -1,4 +1,16 @@
 
+// Includes a JS file into the HTML document
+// Selfmade import feature
+//
+// @param file {String} - The file to import
+//
+let importFile = function(file) {
+	let imported = document.createElement('script');
+	imported.src = file;
+	document.head.appendChild(imported);
+}
+
+
 // #################
 // # Configuration #
 // #################
@@ -180,7 +192,6 @@ Textual.newMessagePostedToView = function (lineNumber) {
 
 Textual.viewFinishedLoading = function () {
 	Textual.fadeOutLoadingScreen(1.00, 1.00);
-
 	setTimeout(function () {
 		Textual.scrollToBottomOfView();
 	}, 300);
