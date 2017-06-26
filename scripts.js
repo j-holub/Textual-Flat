@@ -20,18 +20,6 @@ importFile('Data/Resources/js/util.js');
 // # Configuration #
 // #################
 
-// colors for the colornumber property
-var senderColors = {
-	0: "#1abc9c",
-	1: "#2ecc71",
-	2: "#3498db",
-	3: "#9b59b6",
-	4: "#e74c3c",
-	5: "#e67e22",
-	6: "#f1c40f",
-	7: "#953163"
-}
-
 // last sender
 var lastSenderName;
 
@@ -79,7 +67,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		// if it is longer, treat it as a normal message
 		else{
 			// color the sender
-			colorizeColorNumber(message.querySelector('.sender'));
+			colorizeSender(message);
 
 			// color any inline_nicknames if present
 			var inline_nicknames = message.querySelectorAll('.inline_nickname');
@@ -231,22 +219,7 @@ Textual.topicBarValueChanged = function(newTopic) {
 // # Functions #
 // #############
 
-/* takes the colornumber property of the sender object, and looks up the color for it
- * in the colorNumbers dictionary.
- *
- * @param  Object    the object to be colored
- * @return void
- */
-var colorizeColorNumber = function(object) {
-	// get the color number
-	var colorNumber = object.getAttribute("colornumber");
-	// sometimes negative colornumbers may appear
-	if(colorNumber < 0){
-		colorNumber *= -1;
-	}
-	// set the color to the senderColors dictionary accordingly
-	object.style.color = senderColors[colorNumber % 8];
-}
+
 
 /* takes an .inlineImageCell DOM Node and insertes a .imageWrapper div around the image
  * to enable a zoom effect for the image
