@@ -10,6 +10,10 @@ let importFile = function(file) {
 	document.head.appendChild(imported);
 }
 
+// JQuery
+importFile('Data/Resources/js/jquery.3.2.1.min.js');
+
+
 
 // #################
 // # Configuration #
