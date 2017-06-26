@@ -21,11 +21,8 @@ importFile('Data/Resources/js/messages.js');
 // # Configuration #
 // #################
 
-// last sender
-var lastSenderName;
-
 // grey Message Block for alternating colors to have a better visibility
-var greyBlock = false;
+let greyBlock = false;
 
 // channel topic
 var channelTopic = "";
@@ -57,6 +54,15 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			// Unify messages of the same sender
 			if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
 				hideSenderAndTime(message);
+			}
+			// Swap backgrund if it was a new sender
+			else{
+				greyBlock = !greyBlock;
+			}
+
+			// color the message background
+			if(greyBlock) {
+				addBackground(message);
 			}
 			break;
 		case 'topic':

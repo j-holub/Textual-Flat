@@ -57,3 +57,13 @@ function hideSenderAndTime(message) {
 		display: 'none'
 	});
 }
+
+/* Adds the background color class
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function addBackground(message) {
+	$(message).addClass('greyBackground');
+}
