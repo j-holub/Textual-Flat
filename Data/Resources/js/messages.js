@@ -11,6 +11,9 @@ function getPreviousMessage(message) {
 	if(prevMessage.attr('id') === 'historic_messages'){
 		return $('#historic_messages div.line:last-child');
 	}
+	else if(prevMessage.attr('id') === 'mark'){
+		return getPreviousMessage(prevMessage);
+	}
 	else{
 		return prevMessage;
 	}
