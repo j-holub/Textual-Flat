@@ -15,6 +15,7 @@ importFile('Data/Resources/js/jquery.3.2.1.min.js');
 
 // Modules
 importFile('Data/Resources/js/colors.js');
+importFile('Data/Resources/js/info.js');
 importFile('Data/Resources/js/messages.js');
 
 // #################
@@ -25,7 +26,7 @@ importFile('Data/Resources/js/messages.js');
 let greyBlock = false;
 
 // channel topic
-var channelTopic = "";
+let channelTopic = "";
 
 // # ################# #
 // # Textual Callbacks #
@@ -77,6 +78,8 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		case 'join':
 		case 'part':
 		case 'quit':
+			// hide the user's own status messages
+			hideIfOwn(message);
 			break;
 		default:
 
