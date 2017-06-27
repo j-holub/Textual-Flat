@@ -25,8 +25,6 @@ importFile('Data/Resources/js/messages.js');
 // grey Message Block for alternating colors to have a better visibility
 let greyBlock = false;
 
-// channel topic
-let channelTopic = "";
 
 // # ################# #
 // # Textual Callbacks #
@@ -73,6 +71,9 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			}
 			break;
 		case 'topic':
+			break;
+		case 'mode':
+			handleModeChange(message);
 			break;
 
 		case 'join':

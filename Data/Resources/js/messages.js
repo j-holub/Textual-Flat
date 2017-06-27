@@ -41,6 +41,17 @@ function getMessageType(message) {
 	return $(message).attr('ltype');
 }
 
+/* Gets the command attribute from a amessage
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function getCommand(message) {
+	return $(message).attr('command');
+}
+
+
 /* Hides the Sender of a message
  *
  * @param message {DOM Element} - the message
