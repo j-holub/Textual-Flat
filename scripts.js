@@ -15,6 +15,7 @@ importFile('Data/Resources/js/jquery.3.2.1.min.js');
 
 // Modules
 importFile('Data/Resources/js/colors.js');
+importFile('Data/Resources/js/images.js');
 importFile('Data/Resources/js/info.js');
 importFile('Data/Resources/js/messages.js');
 
@@ -65,18 +66,29 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				greyBlock = !greyBlock;
 			}
 
+			// style the images if present
+			handleInlineImages(message);
+
 			// color the message background
 			if(greyBlock) {
 				addBackground(message);
 			}
 			break;
+		// # ############ #
+		// # Topic Change #
+		// # ############ #
 		case 'topic':
 			handleTopicChange(message);
 			break;
+		// # ########### #
+		// # Mode Change #
+		// # ########### #
 		case 'mode':
 			handleModeChange(message);
 			break;
-
+		// # ################## #
+		// # Join / Part / Quit #
+		// # ################## #
 		case 'join':
 		case 'part':
 		case 'quit':
@@ -118,30 +130,5 @@ Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName)
 
 Textual.topicBarValueChanged = function(newTopic) {
 	// update the channelTopic state variable
-	channelTopic = newTopic.replace(/\s/g, '');;
-}
-
-
-// #############
-// # Functions #
-// #############
-
-
-
-/* takes an .inlineImageCell DOM Node and insertes a .imageWrapper div around the image
- * to enable a zoom effect for the image
- *
- * @param  .inlineImageCell DOM object
- * @return void
- */
-var addInlineImageWrapper = function(inlineImageCell) {
-	// get the link containing the image
-	var imgLinkNode = inlineImageCell.querySelector('a');
-	// create a wrapper element
-	var wrapper = document.createElement("div");
-	wrapper.className += "imageWrapper";
-
-	// put the wrapper around the image
-	inlineImageCell.replaceChild(wrapper, imgLinkNode);
-	wrapper.appendChild(imgLinkNode);
+	channelTopic = newTopic.replace(/\s/g, '');
 }
