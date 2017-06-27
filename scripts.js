@@ -110,33 +110,27 @@ Textual.newMessagePostedToView = function (lineNumber) {
 
 }
 
-Textual.viewFinishedLoading = function () {
+Textual.viewFinishedLoading =  () => {
 	Textual.fadeOutLoadingScreen(1.00, 1.00);
-	setTimeout(function () {
+	setTimeout( () => {
 		Textual.scrollToBottomOfView();
 	}, 300);
 }
 
-Textual.viewFinishedReload = function () {
+Textual.viewFinishedReload =  () => {
 	Textual.viewFinishedLoading();
 }
 
-Textual.viewInitiated = function(viewType, serverHash, channelHash, channelName) {
+Textual.viewInitiated = (viewType, serverHash, channelHash, channelName) => {
 	// inserts the spinner to the loading screen
-	document.getElementById('loading_screen').innerHTML = "<div class=\"spinner\"></div>";
-
-	var tBar = document.getElementById('topic_bar');
-	if(tBar){
+	$('#loading_screen').html("<div class=\"spinner\"></div>")
+	//
+	let topicBar = $('#topic_bar');
+	if(topicBar){
 		// make the content below the topic bar visible
-		document.body.style.marginTop = tBar.clientHeight + "px";
-
-		// set the channelTopic variable
-		channelTopic =  tBar.textContent.replace(/\s/g, '');
+		console.log(tbar.innerHeight());
+		$('body').css({
+			'margin-top': tbar.innerHeight() + "px"
+		});
 	}
-}
-
-
-Textual.topicBarValueChanged = function(newTopic) {
-	// update the channelTopic state variable
-	channelTopic = newTopic.replace(/\s/g, '');
 }
