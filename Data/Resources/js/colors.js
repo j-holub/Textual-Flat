@@ -1,15 +1,27 @@
 
 // colors for the colornumber property
-let senderColors = {
-	0: "#1abc9c",
-	1: "#2ecc71",
-	2: "#3498db",
-	3: "#9b59b6",
-	4: "#e74c3c",
-	5: "#e67e22",
-	6: "#f1c40f",
-	7: "#953163"
-}
+let senderColors = [
+	// green
+	"2ECC71",
+	"64DDBB",
+	"#72F274",
+	"#92F22A",
+	// cyan / blue
+	"00CCCC",
+	"1DABB8",
+	"3498DB",
+	"1D628B",
+	// yellow / orange
+	"F1C40F",
+	"FEC606",
+	"FF5D19",
+	"E74C3C",
+	// red / purple
+	"B3005A",
+	"953163",
+	"9B59B6",
+	"BD3C4E"
+]
 
 /* Colorizes the sendername
  *
@@ -27,7 +39,7 @@ function colorizeSender(message) {
 	}
 	// return the color HEX
 	sender.css({
-		 color: senderColors[colorNumber % 8]
+		 color: senderColors[colorNumber % senderColors.length]
 	});
 }
 
@@ -43,7 +55,7 @@ function colorizeInlineMentions(message) {
     	let colorNumber = parseInt($(inline_nick).attr('colornumber'));
 		// colorize it
 		$(inline_nick).css({
-			color: senderColors[colorNumber % 8]
+			color: senderColors[colorNumber % senderColors.length]
 		});
 	});
 }
