@@ -67,3 +67,37 @@ function hideSenderAndTime(message) {
 function addBackground(message) {
 	$(message).addClass('greyBackground');
 }
+
+/* Adds the top message class to a private message,
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function addTopMessageStyle(message) {
+	if(getMessageType(message) === 'privmsg'){
+		$(message).addClass('top');
+	}
+}
+
+/* Adds the bottom message class to a private message,
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function addBottomMessageStyle(message) {
+	if(getMessageType(message) === 'privmsg'){
+		$(message).addClass('bottom');
+	}
+}
+
+/* Removes the bottom message class of the message
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function removeBottomMessageStyle(message) {
+	$(message).removeClass('bottom');
+}

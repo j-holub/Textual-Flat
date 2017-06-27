@@ -47,16 +47,22 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			colorizeSender(message);
 			// colorize inline mentions
 			colorizeInlineMentions(message);
+			// add the bottom class, because at this point it is the last message
+			// of this sender
+			addBottomMessageStyle(message);
 			// get some information
 			let sender = getSender(message);
 			let lastMessage = getPreviousMessage(message);
 
-			// Unify messages of the same sender
+			// same Sender
 			if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
 				hideSenderAndTime(message);
+				// remove the bottom message style from the last message
+				removeBottomMessageStyle(lastMessage);
 			}
-			// Swap backgrund if it was a new sender
+			// new Sender
 			else{
+				addTopMessageStyle(message);
 				greyBlock = !greyBlock;
 			}
 
