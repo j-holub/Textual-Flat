@@ -15,6 +15,7 @@ importFile('Data/Resources/js/jquery.3.2.1.min.js');
 
 // Modules
 importFile('Data/Resources/js/colors.js');
+importFile('Data/Resources/js/correction.js');
 importFile('Data/Resources/js/images.js');
 importFile('Data/Resources/js/info.js');
 importFile('Data/Resources/js/messages.js');
@@ -43,35 +44,42 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		// # Private Message #
 		// # ############### #
 		case 'privmsg':
-			// colorize the sender
-			colorizeSender(message);
-			// colorize inline mentions
-			colorizeInlineMentions(message);
-			// add the bottom class, because at this point it is the last message
-			// of this sender
-			addBottomMessageStyle(message);
-			// get some information
-			let sender = getSender(message);
-			let lastMessage = getPreviousMessage(message);
-
-			// same Sender
-			if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
-				hideSenderAndTime(message);
-				// remove the bottom message style from the last message
-				removeBottomMessageStyle(lastMessage);
+			// see if the message is a correction of the previous message
+			if(messageIsCorrection(message)){
+				handleCorrect(message);
 			}
-			// new Sender
+			// handle the normal message
 			else{
-				addTopMessageStyle(message);
-				greyBlock = !greyBlock;
-			}
+				// colorize the sender
+				colorizeSender(message);
+				// colorize inline mentions
+				colorizeInlineMentions(message);
+				// add the bottom class, because at this point it is the last message
+				// of this sender
+				addBottomMessageStyle(message);
+				// get some information
+				let sender = getSender(message);
+				let lastMessage = getPreviousMessage(message);
 
-			// style the images if present
-			handleInlineImages(message);
+				// same Sender
+				if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
+					hideSenderAndTime(message);
+					// remove the bottom message style from the last message
+					removeBottomMessageStyle(lastMessage);
+				}
+				// new Sender
+				else{
+					addTopMessageStyle(message);
+					greyBlock = !greyBlock;
+				}
 
-			// color the message background
-			if(greyBlock) {
-				addBackground(message);
+				// style the images if present
+				handleInlineImages(message);
+
+				// color the message background
+				if(greyBlock) {
+					addBackground(message);
+				}
 			}
 			break;
 		// # ############ #

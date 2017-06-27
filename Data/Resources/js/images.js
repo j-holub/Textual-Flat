@@ -8,6 +8,6 @@
  */
 function handleInlineImages(message) {
 	$(message).find('.inlineImageCell').each((index, image) => {
-		$(inlineImageCell).wrap('<div class="imageWrapper"></div>')
+		$(image).wrap('<div class="imageWrapper"></div>')
 	});
 }

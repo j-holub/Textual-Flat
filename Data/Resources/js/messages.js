@@ -45,18 +45,27 @@ function getMessageType(message) {
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return message command {String}
  */
 function getCommand(message) {
 	return $(message).attr('command');
 }
 
+/* Returns the message content
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return message content {String}
+ */
+function getMessageContent(message) {
+	return $(message).find('.innerMessage').text().trim();
+}
 
 /* Hides the Sender of a message
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return void
  */
 function hideSenderAndTime(message) {
 	// hide sender
@@ -73,7 +82,7 @@ function hideSenderAndTime(message) {
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return void
  */
 function addBackground(message) {
 	$(message).addClass('greyBackground');
@@ -83,7 +92,7 @@ function addBackground(message) {
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return void
  */
 function addTopMessageStyle(message) {
 	if(getMessageType(message) === 'privmsg'){
@@ -95,7 +104,7 @@ function addTopMessageStyle(message) {
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return void
  */
 function addBottomMessageStyle(message) {
 	if(getMessageType(message) === 'privmsg'){
@@ -107,7 +116,7 @@ function addBottomMessageStyle(message) {
  *
  * @param message {DOM Element} - the message
  *
- * @return vooid
+ * @return void
  */
 function removeBottomMessageStyle(message) {
 	$(message).removeClass('bottom');
