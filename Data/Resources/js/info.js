@@ -34,3 +34,28 @@ function handleModeChange(message) {
 	}
 	channelMode = newMode;
 }
+
+/* Updates the channelTopic status variable and deletes the topic change message
+ * if the topic hasn't changed
+ *
+ * @param message {DOM Element} - the message
+ *
+ * @return vooid
+ */
+function handleTopicChange(message) {
+	// Set By message
+	if(getCommand(message) === '333'){
+		let prevMessage = getPreviousMessage(message);
+		// Topic is message
+		if(getCommand(prevMessage) === '332'){
+			let newTopic = $(prevMessage).find('.message').text().replace('Topic is', '').trim();
+			// delete the messages if the topic hasn't changed
+			if(newTopic === channelTopic){
+				$(message).remove()
+				$(prevMessage).remove();
+			}
+			// update the topic state
+			channelTopic = newTopic;
+		}
+	}
+}

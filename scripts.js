@@ -71,6 +71,7 @@ Textual.newMessagePostedToView = function (lineNumber) {
 			}
 			break;
 		case 'topic':
+			handleTopicChange(message);
 			break;
 		case 'mode':
 			handleModeChange(message);
