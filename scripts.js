@@ -128,9 +128,8 @@ Textual.viewInitiated = (viewType, serverHash, channelHash, channelName) => {
 	let topicBar = $('#topic_bar');
 	if(topicBar){
 		// make the content below the topic bar visible
-		console.log(tbar.innerHeight());
 		$('body').css({
-			'margin-top': tbar.innerHeight() + "px"
+			'margin-top': topicBar.innerHeight() + "px"
 		});
 	}
 }
