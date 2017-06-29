@@ -53,6 +53,10 @@ function colorizeInlineMentions(message) {
 	$(message).find('.inline_nickname').each((index, inline_nick) =>{
 		// get the color number
     	let colorNumber = parseInt($(inline_nick).attr('colornumber'));
+		// sometimes negative colornumbers may appear
+		if(colorNumber < 0){
+			colorNumber *= -1;
+		}
 		// colorize it
 		$(inline_nick).css({
 			color: senderColors[colorNumber % senderColors.length]
