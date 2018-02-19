@@ -45,20 +45,23 @@ a:hover {
 /* # #### #*/
 
 div.line {
-	padding: 0em 0.3em;
+	padding: 0.05em 0.5em;
 	position: relative;
+
+	letter-spacing: 0.03em;
+	line-height: 1.2em;
 }
 
 /*Used for private messages*/
 div.line.top{
-	padding-top: 0.4em;
+	padding-top: 0.5em;
 }
 div.line.bottom{
-	padding-bottom: 0.4em;
+	padding-bottom: 0.5em;
 }
 
 div.line[ltype='debug']{
-	padding: 0.4em 0.3em;
+	padding: 0.5em 0.5em;
 }
 
 
@@ -108,7 +111,7 @@ span.senderContainer {
 
 	position: absolute;
 	left: 0;
-	top: 0.4em;
+	top: 0.5em;
 	bottom: 0;
 
 	overflow: hidden;
@@ -145,6 +148,10 @@ div.line[ltype='debug'] {
 	padding-left: 10.3em;
 	color: #FFF;
 	background-color: #DADADA;
+}
+
+div.line[ltype='action'] .innerMessage {
+	font-style: italic;
 }
 
 

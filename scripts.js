@@ -82,6 +82,25 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				}
 			}
 			break;
+		// # ###### #
+		// # Action #
+		// # ###### #
+		case 'action':
+			// add Bottom Message Style by default
+			addBottomMessageStyle(message);
+
+			// get some information
+			let sender = getSender(message);
+			let lastMessage = getPreviousMessage(message);
+			if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
+				// remove the bottom message style from the last message
+				removeBottomMessageStyle(lastMessage);
+			}
+			else{
+				addTopMessageStyle(message);
+				greyBlock = !greyBlock;
+			}
+			break;
 		// # ############ #
 		// # Topic Change #
 		// # ############ #
