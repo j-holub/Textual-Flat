@@ -62,8 +62,15 @@ Textual.newMessagePostedToView = function (lineNumber) {
 				let lastMessage = getPreviousMessage(message);
 
 				// same Sender
-				if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
-					hideSenderAndTime(message);
+				if(sender === getSender(lastMessage)){
+					if(getMessageType(lastMessage) === 'privmsg'){
+						hideSenderAndTime(message);
+					}
+					// if it was the same sender but not a private message (an action
+					// for example), add the top padding
+					else{
+						addTopMessageStyle(message);
+					}
 					// remove the bottom message style from the last message
 					removeBottomMessageStyle(lastMessage);
 				}
@@ -88,16 +95,16 @@ Textual.newMessagePostedToView = function (lineNumber) {
 		case 'action':
 			// add Bottom Message Style by default
 			addBottomMessageStyle(message);
+			addTopMessageStyle(message);
 
-			// get some information
+			//get some information
 			let sender = getSender(message);
 			let lastMessage = getPreviousMessage(message);
-			if(getMessageType(lastMessage) === 'privmsg' && sender === getSender(lastMessage)){
+			if(sender === getSender(lastMessage)){
 				// remove the bottom message style from the last message
 				removeBottomMessageStyle(lastMessage);
 			}
 			else{
-				addTopMessageStyle(message);
 				greyBlock = !greyBlock;
 			}
 			break;
