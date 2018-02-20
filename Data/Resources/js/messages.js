@@ -88,28 +88,24 @@ function addBackground(message) {
 	$(message).addClass('greyBackground');
 }
 
-/* Adds the top message class to a private message,
+/* Adds the top message class to a message,
  *
  * @param message {DOM Element} - the message
  *
  * @return void
  */
 function addTopMessageStyle(message) {
-	if(getMessageType(message) === 'privmsg'){
 		$(message).addClass('top');
-	}
 }
 
-/* Adds the bottom message class to a private message,
+/* Adds the bottom message class to a message,
  *
  * @param message {DOM Element} - the message
  *
  * @return void
  */
 function addBottomMessageStyle(message) {
-	if(getMessageType(message) === 'privmsg'){
 		$(message).addClass('bottom');
-	}
 }
 
 /* Removes the bottom message class of the message
