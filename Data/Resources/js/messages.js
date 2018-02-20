@@ -28,7 +28,7 @@ function getPreviousMessage(message) {
  */
 function getSender(message) {
 	// drop the last :
-	return $(message).find('.sender').text().slice(0, -1)
+	return $(message).find('.sender').text();
 }
 
 /* Gets the message type

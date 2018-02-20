@@ -52,8 +52,6 @@ function handleTopicChange(message) {
 			let newTopic = $(prevMessage).find('.message').text().replace('Topic is', '').trim();
 			// delete the messages if the topic hasn't changed
 			if(newTopic === channelTopic){
-				console.log(newTopic);
-				console.log(channelTopic);
 				$(message).remove()
 				$(prevMessage).remove();
 			}
